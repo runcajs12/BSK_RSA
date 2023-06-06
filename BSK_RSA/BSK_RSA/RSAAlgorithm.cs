@@ -24,11 +24,14 @@ namespace BSK_RSA
 
         public void Decrypt(string pathin, string pathout) 
         {
-            try
-            {
 
+                Console.Clear();
+                Console.WriteLine("Podaj pierwszą część klucza");
 
-                string[] encryptedValues = File.ReadAllLines(pathin);
+                BigInteger _decryptionKey = BigInteger.Parse(Console.ReadLine());
+			Console.WriteLine("Podaj drugą część klucza");
+			BigInteger _n = BigInteger.Parse(Console.ReadLine());
+			string[] encryptedValues = File.ReadAllLines(pathin);
 
 
                 StringBuilder decryptedText = new StringBuilder();
@@ -38,7 +41,7 @@ namespace BSK_RSA
                     BigInteger encryptedNumber = BigInteger.Parse(encryptedValue);
 
                     // Deszyfrowanie: message = ciphertext^d mod n
-                    BigInteger decryptedNumber = BigInteger.ModPow(encryptedNumber, decryptionKey, n);
+                    BigInteger decryptedNumber = BigInteger.ModPow(encryptedNumber, _decryptionKey, _n);
                     byte decryptedByte = (byte)decryptedNumber;
 
                     decryptedText.Append((char)decryptedByte);
@@ -52,12 +55,8 @@ namespace BSK_RSA
                         sw.WriteLine(decryptedText.ToString());
                 };
                
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Wystąpił błąd podczas odczytu pliku lub deszyfrowania: " + ex.Message);
-               
-            }
+            
+
 
         }
 
@@ -97,7 +96,7 @@ namespace BSK_RSA
 
             GenerateKeys();
             Console.Clear();
-            Console.WriteLine($"Wygenerowane klucze: \n encryptionKey: {encryptionKey}\n decryptionKey: {decryptionKey}");
+            Console.WriteLine($"Wygenerowane klucze: \n encryptionKey: {encryptionKey}\n decryptionKey: {decryptionKey}\n n: {n}");
         }
         public void Encrypt(string pathin, string pathout)
         {

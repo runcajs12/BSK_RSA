@@ -16,7 +16,7 @@ namespace BSK_RSA
             string encrypted1 = "encrypted1.txt";
             string encrypted2 = "encrypted2.txt";
             RSAAlgorithm test = new RSAAlgorithm();
-            test.Initialize();
+            //test.Initialize();
             //test.Encrypt(testencrypt1, encrypted1);
 
             string testdecrypt1 = "encrypted1.txt";  
